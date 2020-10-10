@@ -1,6 +1,6 @@
+import { Constants } from './../../shared/constants';
 import { ArticleListRequest } from './../models/article/article-list-request';
 import { Injectable } from '@angular/core';
-import { Constants } from 'src/app/shared/constants';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { SearchArticleDto } from '../models/article/search-article';
 import { BookmarkedArticlesDto } from '../models/article/bookmark-article';
@@ -18,13 +18,12 @@ export class ArticleService {
     this.url = this.constants.url;
   }
 
-  getArticleList(skipNumber) {
+  getArticleList() {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    const params = new HttpParams().set('skipNumber', skipNumber);
     // return this.http.get<ArticleListRequest[]>(this.url + '/Article/AppArticleList', {
-    return this.http.get<ArticleListRequest[]>(this.url + '/Article/ArticlesLazyLoadInMobile', {
-      headers, params
+    return this.http.get<ArticleListRequest[]>(this.url , {
+      headers
     });
   }
 

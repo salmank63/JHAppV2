@@ -1,19 +1,19 @@
+import { AuthenticationService } from './../../core/services/authentication.service';
+import { NavbarService } from './../../core/services/shared_services/navbar.service';
+import { Constants } from './../../shared/constants';
+import { BookmarkedArticlesDto } from './../../core/models/article/bookmark-article';
+import { SearchArticleDto } from './../../core/models/article/search-article';
+import { ArticleListRequest } from './../../core/models/article/article-list-request';
+import { ArticleService } from './../../core/services/article.service';
 import { Component, OnInit, OnDestroy, HostListener, AfterViewInit, ViewChild } from '@angular/core';
-import { ArticleService } from 'src/app/core/services/article.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ArticleListRequest } from 'src/app/core/models/article/article-list-request';
 import { first, map } from 'rxjs/operators';
 import { Title, Meta } from '@angular/platform-browser';
-import { NavbarService } from 'src/app/core/services/shared_services/navbar.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { Dialogs } from '@ionic-native/dialogs/ngx';
 import { AdMobFreeBannerConfig, AdMobFree, AdMobFreeInterstitialConfig, AdMobFreeRewardVideoConfig } from '@ionic-native/admob-free/ngx';
 import { Platform, NavController, AlertController, ToastController, IonContent } from '@ionic/angular';
-import { Constants } from 'src/app/shared/constants';
-import { SearchArticleDto } from 'src/app/core/models/article/search-article';
-import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { BookmarkedArticlesDto } from 'src/app/core/models/article/bookmark-article';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 declare var $: any;
@@ -72,7 +72,7 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit() {
     this.articleService
-      .getArticleList(this.skipNumber)
+      .getArticleList()
       .pipe(first())
       .subscribe(data => {
         this.articleLists = data;
