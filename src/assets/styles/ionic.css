@@ -1,0 +1,35 @@
+.ionTitle {
+    padding-left: 20px;
+}
+
+.ionMB {
+    padding-left: 4px;
+}
+
+.ionMenuTitle {
+    padding-left: 30px;
+}
+
+.aboutUsBody {
+    padding-bottom: 10px !important;
+}
+
+.aboutUsMarginTop {
+    margin-top: 10px !important;
+    margin-bottom: 100px !important;
+}
+
+#background-content {
+    background: #f6f6f6;
+}
+
+.removeBottomWhiteSpace {
+    height: 100%;
+}
+
+.selectableText {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}

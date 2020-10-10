@@ -1,5 +1,7 @@
 {
-  "name": "TestNavigation",
-  "integrations": {},
+  "name": "JHAppV2",
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

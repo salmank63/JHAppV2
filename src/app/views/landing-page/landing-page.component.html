@@ -1,0 +1,101 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button class="ionMB"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ionTitle">JugaadHai</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="scrollView($event)">
+
+  <div *ngIf="loading" class="loader-div">
+		<div class="loader"></div>
+  </div>
+
+  <div *ngIf="isShowScrollTop" class="scrollToTop" (click)="scrollToTop()">
+		<ion-icon class="scrollToTopInMiddle" name="arrow-up-outline"></ion-icon>
+	</div>
+
+  <!-- Page Content -->
+  <section class="blog-area section sectionMinHeight">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-12">
+          <div class="row">
+
+            <div class="navbar sticky-top">
+              <div class="wrapper tab-div" style="margin-left: auto; margin-right: auto;">
+                <nav class="tabs" style="margin-bottom: 0px;">
+                  <div [ngClass]="articleActive ? 'selector artSelect' : 'selector dealSelect'"></div>
+                  <a [ngClass]="articleActive ? 'active' : ''" (click)="makeActive('article')">Articles</a>
+                  <a [ngClass]="articleActive == false ? 'active' : ''" (click)="makeActive('deal')"><i
+                      class="fas fa-hand-rock"></i>Deals</a>
+                </nav>
+              </div>
+  
+              <!--Search Bar-->
+              <ion-searchbar placeholder="Enter company name" animated 
+               style="z-index: 1;" class="col-lg-3 col-md-6" (ionInput)="filterListKeyboardCleared($event)" (ionClear)="filterListClear($event)" (keyup.enter)="filterList($event)"></ion-searchbar>
+               <!-- style="z-index: 1;" class="col-lg-3 col-md-6 navbar sticky-top" (ionInput)="filterList($event)"></ion-searchbar> -->
+  
+            </div>
+            
+            <ng-container *ngFor="let item of articleLists">
+              <div class="col-lg-3 col-md-6" (click)="goToArticleDetail(item.Id, item.SeoTitle, item)">
+                <div class="card h-100">
+                  <div class="single-post post-style-1">
+
+                    <div class="blog-image"><img src="https://admin.jugaadhai.in/{{item.ImageUrl}}" alt="Article Image">
+                    </div>
+
+                    <a class="avatar">
+                      <!-- <img src="http://localhost:55812/{{item.ComImage}}" alt="Company Logo"> -->
+                      <img src="https://admin.jugaadhai.in/{{item.ComImage}}" alt="Company Logo">
+                    </a>
+
+                    <h4 class="title"><a href="" onclick="return false;"><b>{{item.ArticleHeading}}</b></a></h4>
+
+                    <span class="post-date">{{item.Admin}}, {{item.LastModifiedOn | date:'dd MMM yyyy hh:mm a'}}</span>
+
+                    <ul class="post-footer">
+                      <!-- <li (click)="onClapped(item.Id, item.Claps);$event.stopPropagation()"><a href="javascript:"
+                          class="green"><img src="../../../assets/images/clap.png">{{item.Claps}}</a></li> -->
+                      <li (click)="onEvent($event)"><a (click)="shareArticle(item)" data-action="share/whatsapp/share"
+                            class="blue"><i class="fa fa-share-alt" aria-hidden="true"></i>Share</a></li>
+                      <li (click)="onEvent($event)"><a href="#" (click)="stopPropagation()" class="blue"><i
+                            class="ion-eye"></i>{{item.Views}}</a>
+                      </li>
+                      <li (click)="bookmarkArticle(item.Id, item.IsBookmark);$event.stopPropagation()" >
+                        <a href="#" (click)="stopPropagation()" class="blue">
+                          <i [ngClass]="item.IsBookmark ? 'fa-bookmark' : 'fa-bookmark-o'"
+                            style="font-size: 1.5em; vertical-align: middle;" class="fa"  aria-hidden="true"></i>
+                        </a>
+                      </li>
+                    </ul>
+
+                  </div>
+                  <!-- single-post -->
+                </div>
+                <!-- card -->
+              </div>
+            </ng-container>
+            <!-- <ion-spinner></ion-spinner> -->
+          </div>
+
+          <div class="row">
+            <div *ngIf="articleLists.length === 0" class="commentTextColorBlack" style="margin-top: 30%;">
+              <p class="blue" style="font-size: 20px; color: black; padding: 10px;">
+                No records found with <b>"{{searchDto.Keywords}}"</b> keyword. Please search with proper company name.
+              </p>
+            </div>
+          </div>
+
+          <ion-spinner *ngIf="articleLists.length > 15" style="color: #01579b;"></ion-spinner>
+        </div>
+      </div>
+      <br>
+    </div>
+  </section>
+</ion-content>

@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button class="ionMB"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ionTitle">Page B</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p>
+    You are on page B.
+  </p>
+  <a [routerLink]="['/pageC']">Go to Page C</a>
+</ion-content>
