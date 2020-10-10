@@ -26,39 +26,4 @@ export class ArticleService {
       headers
     });
   }
-
-  getArticleDetail(id) {
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    const params = new HttpParams().set('id', id);
-    return this.http.get<ArticleListRequest>( this.url + '/Article/ArticleDetail', {
-      headers, params
-    });
-  }
-
-  increaseClapCount(articleDto: ArticleListRequest) {
-    return this.http.post(this.url + '/Article/IncreaseClapCounts', articleDto);
-  }
-
-  getArticlesBySearchKeyword(searchArticleDto: SearchArticleDto) {
-    return this.http.post<ArticleListRequest[]>(this.url + '/Article/SearchArticles', searchArticleDto);
-  }
-
-  saveBookMarkArticle(markDto: BookmarkedArticlesDto) {
-    return this.http.post<boolean[]>(this.url + '/Article/SaveBookMarkArticle', markDto);
-  }
-
-  removeBookMarkArticle(markDto: BookmarkedArticlesDto) {
-    return this.http.post<boolean[]>(this.url + '/Article/RemoveBookMarkArticle', markDto);
-  }
-
-  getSavedArticles(userId) {
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    const params = new HttpParams().set('userId', userId);
-    // return this.http.get<ArticleListRequest[]>(this.url + '/Article/AppArticleList', {
-    return this.http.get<ArticleListRequest[]>(this.url + '/Article/ShowBookMarkedArticles', {
-      headers, params
-    });
-  }
 }
